@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramadan Kareem - A Peaceful GitHub Project</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* Custom Tailwind Configuration for colors */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ramadan-green': '#059669', /* Emerald 600 */
+                        'ramadan-gold': '#F59E0B',  /* Amber 500 */
+                        'ramadan-light': '#F0FDF4', /* Emerald 50 - Very light background */
+                        'ramadan-dark-green': '#065F46', /* Emerald 800 */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+
+        /* Base CSS for smooth page transitions */
+        .page {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .page.hidden-page {
+            opacity: 0;
+            transform: translateY(20px);
+            display: none !important;
+        }
+
+        /* Subtle Crescent Moon Animation */
+        @keyframes subtle-float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+
+        #crescent-moon {
+            animation: subtle-float 4s ease-in-out infinite;
+        }
+
+        /* Scrollbar styling for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D97706; /* Amber 700 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E5E7EB;
+        }
+
+    </style>
+</head>
+<body class="bg-ramadan-light text-ramadan-dark-green min-h-screen flex flex-col">
+
+    <!-- Header / Navigation Bar -->
+    <header class="bg-ramadan-green shadow-xl sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo/Title -->
+                <div class="flex items-center">
+                    <i id="crescent-moon" class="fas fa-moon text-ramadan-gold text-2xl mr-3"></i>
+                    <span class="text-2xl font-bold text-white">Ramadan Hub</span>
+                </div>
+                <!-- Navigation Links (Desktop) -->
+                <nav class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <button data-page="home" class="nav-link text-white hover:text-ramadan-gold px-3 py-2 rounded-md text-sm font-medium transition duration-150 bg-ramadan-dark-green" aria-current="page">Home</button>
+                        <button data-page="calendar" class="nav-link text-white hover:text-ramadan-gold px-3 py-2 rounded-md text-sm font-medium transition duration-150">Calendar</button>
+                        <button data-page="duas" class="nav-link text-white hover:text-ramadan-gold px-3 py-2 rounded-md text-sm font-medium transition duration-150">Duas</button>
+                    </div>
+                </nav>
+                <!-- Mobile Menu Button (Hamburger) -->
+                <button id="mobile-menu-button" class="md:hidden text-white hover:text-ramadan-gold focus:outline-none transition duration-150">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="md:hidden hidden bg-ramadan-dark-green pb-2">
+            <button data-page="home" class="nav-link block w-full text-left text-white hover:text-ramadan-gold px-3 py-2 text-base font-medium transition duration-150 bg-ramadan-green">Home</button>
+            <button data-page="calendar" class="nav-link block w-full text-left text-white hover:text-ramadan-gold px-3 py-2 text-base font-medium transition duration-150">Calendar</button>
+            <button data-page="duas" class="nav-link block w-full text-left text-white hover:text-ramadan-gold px-3 py-2 text-base font-medium transition duration-150">Duas</button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="content-area" class="flex-grow max-w-7xl mx-auto w-full p-4 md:p-8">
+
+        <!-- 1. Home Page -->
+        <div id="home-page" class="page bg-white p-6 md:p-10 rounded-xl shadow-2xl border-t-4 border-ramadan-gold">
+            <div class="text-center space-y-4">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-ramadan-green tracking-tight">
+                    <i class="fas fa-star text-ramadan-gold text-4xl mr-3"></i>
+                    Ramadan Kareem
+                    <i class="fas fa-star text-ramadan-gold text-4xl ml-3"></i>
+                </h1>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    A peaceful digital space dedicated to the blessed month of Ramadan. This GitHub project aims to be a minimal, informational resource for daily routines and spiritual reminders.
+                </p>
+            </div>
+
+            <div class="mt-12 grid md:grid-cols-3 gap-8 text-center">
+                <div class="p-6 bg-ramadan-light rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
+                    <i class="fas fa-clock text-4xl text-ramadan-gold mb-3"></i>
+                    <h2 class="text-2xl font-semibold text-ramadan-dark-green">Timings & Structure</h2>
+                    <p class="mt-2 text-gray-600">View the daily Suhoor and Iftar timings and keep track of the month's progress.</p>
+                </div>
+                <div class="p-6 bg-ramadan-light rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
+                    <i class="fas fa-book-reader text-4xl text-ramadan-gold mb-3"></i>
+                    <h2 class="text-2xl font-semibold text-ramadan-dark-green">Essential Duas</h2>
+                    <p class="mt-2 text-gray-600">Access key supplications for the beginning, middle, and end of the fast, and for Laylat al-Qadr.</p>
+                </div>
+                <div class="p-6 bg-ramadan-light rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
+                    <i class="fas fa-hands-praying text-4xl text-ramadan-gold mb-3"></i>
+                    <h2 class="text-2xl font-semibold text-ramadan-dark-green">Spiritual Reflection</h2>
+                    <p class="mt-2 text-gray-600">Use this time for deeper contemplation, focusing on growth and charitable actions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Calendar Page -->
+        <div id="calendar-page" class="page hidden-page bg-white p-6 md:p-10 rounded-xl shadow-2xl border-t-4 border-ramadan-gold">
+            <h2 class="text-4xl font-extrabold text-ramadan-green mb-6 text-center">
+                Ramadan Daily Calendar <i class="far fa-calendar-alt text-ramadan-gold"></i>
+            </h2>
+            <p class="text-center text-gray-600 mb-8">Mock timings provided for illustration. Always verify with local masjid/official sources.</p>
+
+            <div class="overflow-x-auto rounded-lg shadow-lg">
+                <table class="min-w-full divide-y divide-ramadan-gold">
+                    <thead class="bg-ramadan-green text-white">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Day</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Date (Hijri)</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Suhoor Ends</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Iftar Begins</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-ramadan-light divide-y divide-ramadan-green/30 text-gray-700">
+                        <tr class="hover:bg-ramadan-green/10 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-ramadan-gold">1</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Ramadan 1</td>
+                            <td class="px-6 py-4 whitespace-nowrap">5:45 AM</td>
+                            <td class="px-6 py-4 whitespace-nowrap">6:35 PM</td>
+                        </tr>
+                        <tr class="hover:bg-ramadan-green/10 transition duration-150 bg-ramadan-gold/20 font-semibold">
+                            <td class="px-6 py-4 whitespace-nowrap text-ramadan-dark-green">10</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Ramadan 10</td>
+                            <td class="px-6 py-4 whitespace-nowrap">5:30 AM</td>
+                            <td class="px-6 py-4 whitespace-nowrap">6:45 PM</td>
+                        </tr>
+                        <tr class="hover:bg-ramadan-green/10 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-ramadan-gold">20</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Ramadan 20</td>
+                            <td class="px-6 py-4 whitespace-nowrap">5:15 AM</td>
+                            <td class="px-6 py-4 whitespace-nowrap">6:55 PM</td>
+                        </tr>
+                        <tr class="hover:bg-ramadan-green/10 transition duration-150 bg-ramadan-gold/20 font-semibold">
+                            <td class="px-6 py-4 whitespace-nowrap text-ramadan-dark-green">27</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Laylat al-Qadr (Est.)</td>
+                            <td class="px-6 py-4 whitespace-nowrap">5:05 AM</td>
+                            <td class="px-6 py-4 whitespace-nowrap">7:05 PM</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-8 p-4 border-l-4 border-ramadan-green bg-ramadan-green/10 rounded-lg">
+                <p class="font-semibold text-ramadan-dark-green">Note on Timing:</p>
+                <p class="text-sm text-gray-600">The Suhoor end time marks the beginning of the Fajr prayer time (Subh Sadiq). Iftar time is always Maghrib prayer time (Sunset).</p>
+            </div>
+        </div>
+
+        <!-- 3. Duas Page -->
+        <div id="duas-page" class="page hidden-page bg-white p-6 md:p-10 rounded-xl shadow-2xl border-t-4 border-ramadan-gold">
+            <h2 class="text-4xl font-extrabold text-ramadan-green mb-6 text-center">
+                Essential Ramadan Duas <i class="fas fa-scroll text-ramadan-gold"></i>
+            </h2>
+            <p class="text-center text-gray-600 mb-8">Short supplications to read throughout the blessed month.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Dua 1: Intention for Fasting (Niyyah) -->
+                <div class="p-5 bg-ramadan-light rounded-lg shadow-md border border-ramadan-gold/50">
+                    <h3 class="text-2xl font-bold text-ramadan-dark-green mb-3">1. Dua for Suhoor (Intention)</h3>
+                    <p class="text-right text-3xl font-serif text-ramadan-green my-4" style="font-family: 'Times New Roman', serif;">
+                        وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ
+                    </p>
+                    <p class="text-lg text-gray-700 italic border-t pt-3 border-ramadan-gold/30">
+                        *Wa bi-sawmi ghadin nawaytu min shahri Ramadan.*
+                    </p>
+                    <p class="text-sm mt-1 text-gray-500">
+                        (Translation: I intend to keep the fast for tomorrow in the month of Ramadan.)
+                    </p>
+                </div>
+
+                <!-- Dua 2: Breaking the Fast (Iftar) -->
+                <div class="p-5 bg-ramadan-light rounded-lg shadow-md border border-ramadan-gold/50">
+                    <h3 class="text-2xl font-bold text-ramadan-dark-green mb-3">2. Dua for Iftar (Breaking Fast)</h3>
+                    <p class="text-right text-3xl font-serif text-ramadan-green my-4" style="font-family: 'Times New Roman', serif;">
+                        اَللَّهُمَّ إِنِّي لَكَ صُمْتُ وَ بِكَ آمَنْتُ وَ عَلَيْكَ تَوَكَّلْتُ وَ عَلَى رِزْقِكَ أَفْطَرْتُ
+                    </p>
+                    <p class="text-lg text-gray-700 italic border-t pt-3 border-ramadan-gold/30">
+                        *Allahumma inni laka sumtu wa bika aamantu wa 'alayka tawakkaltu wa 'ala rizqika aftartu.*
+                    </p>
+                    <p class="text-sm mt-1 text-gray-500">
+                        (Translation: O Allah! I fasted for Your sake, and I believe in You, and I put my trust in You, and I break my fast with Your provision.)
+                    </p>
+                </div>
+
+                <!-- Dua 3: Post-Iftar (Thirst gone) -->
+                <div class="p-5 bg-ramadan-light rounded-lg shadow-md border border-ramadan-gold/50 col-span-1 md:col-span-2">
+                    <h3 class="text-2xl font-bold text-ramadan-dark-green mb-3">3. Post-Iftar Dua (Simpler)</h3>
+                    <p class="text-right text-3xl font-serif text-ramadan-green my-4" style="font-family: 'Times New Roman', serif;">
+                        ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ
+                    </p>
+                    <p class="text-lg text-gray-700 italic border-t pt-3 border-ramadan-gold/30">
+                        *Dhahaba-zh Zhama’u, wabtallatil-‘uruuqu, wa thabatal-ajru in shaa’ Allah.*
+                    </p>
+                    <p class="text-sm mt-1 text-gray-500">
+                        (Translation: The thirst is gone, the veins are moistened, and the reward is confirmed, if Allah wills.)
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-ramadan-dark-green text-white p-4 text-center text-sm mt-8">
+        <p>&copy; 2024 Ramadan Hub. Designed with peaceful intentions and built for the community.</p>
+        <p class="mt-1">
+            <a href="#" class="hover:text-ramadan-gold transition duration-150">Privacy</a> |
+            <a href="#" class="hover:text-ramadan-gold transition duration-150">Contribute on GitHub</a>
+        </p>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        /**
+         * Hides all pages and shows the selected one with a fade-in animation.
+         * Updates the active state of the navigation links.
+         * @param {string} pageName - The ID prefix of the page to show (e.g., 'home', 'calendar').
+         */
+        function showPage(pageName) {
+            const targetPageId = `${pageName}-page`;
+
+            pages.forEach(page => {
+                if (page.id === targetPageId) {
+                    page.classList.remove('hidden-page');
+                    page.style.display = 'block';
+                    // Force reflow to restart CSS animation/transition
+                    void page.offsetWidth;
+                } else {
+                    page.classList.add('hidden-page');
+                    // Hide completely after transition
+                    setTimeout(() => {
+                        if (page.classList.contains('hidden-page')) {
+                             page.style.display = 'none';
+                        }
+                    }, 500);
+                }
+            });
+
+            // Update Nav Link Active State
+            navLinks.forEach(link => {
+                link.classList.remove('bg-ramadan-dark-green', 'font-semibold');
+                if (link.dataset.page === pageName) {
+                    link.classList.add('bg-ramadan-dark-green', 'font-semibold');
+                }
+            });
+
+             // Close mobile menu after selection
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+
+        /**
+         * Initializes event listeners for navigation and mobile menu.
+         */
+        function init() {
+            // Set up page navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const page = e.currentTarget.dataset.page;
+                    showPage(page);
+                });
+            });
+
+            // Toggle mobile menu
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Show the home page initially
+            showPage('home');
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
