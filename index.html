@@ -3,320 +3,457 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramadan Kareem - A Peaceful GitHub Project</title>
+    <title>Ramadan: The Illuminated Path | Guidance and Devotion</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Use Inter font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
-        /* Custom Tailwind Configuration for colors */
+    <!-- Load particles.js for Advanced Animated Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+
+    <!-- Configure Tailwind for custom Green/Gold theme and Inter font -->
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'ramadan-green': '#059669', /* Emerald 600 */
-                        'ramadan-gold': '#F59E0B',  /* Amber 500 */
-                        'ramadan-light': '#F0FDF4', /* Emerald 50 - Very light background */
-                        'ramadan-dark-green': '#065F46', /* Emerald 800 */
+                        'dark-green': '#1E392A',
+                        'deep-green': '#2C5F2D',
+                        'gold': '#FFD700',
+                        'light-gold': '#FDD835',
+                        'cream': '#F0FFF0',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 10s linear infinite',
+                        'border-pulse': 'border-glow 1.5s infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'lantern-glow': 'lantern-shine 3s ease-in-out infinite alternate',
+                        'text-flicker': 'text-flicker 4s linear infinite',
+                    },
+                    keyframes: {
+                        'border-glow': {
+                            '0%, 100%': { 'box-shadow': '0 0 10px #FFD700, 0 0 5px #FDD835' },
+                            '50%': { 'box-shadow': '0 0 25px #FFD700, 0 0 12px #FDD835' },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'lantern-shine': {
+                            '0%': { 'box-shadow': '0 0 5px #FDD835, 0 0 15px #FFD700 inset' },
+                            '50%': { 'box-shadow': '0 0 15px #FFD700, 0 0 25px #FDD835 inset' },
+                            '100%': { 'box-shadow': '0 0 5px #FDD835, 0 0 15px #FFD700 inset' },
+                        },
+                        'text-flicker': {
+                            '0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%': { opacity: '0.99', filter: 'drop-shadow(0 0 1px #FFD700)' },
+                            '20%, 21.999%, 63%, 63.999%, 65%, 69.999%': { opacity: '0.8', filter: 'drop-shadow(0 0 0.5px #FDD835)' },
+                        }
                     }
                 }
             }
         }
+    </script>
+    <style>
+        /* Custom Styles for Particles, Cursor, and Button Borders */
 
-        /* Base CSS for smooth page transitions */
-        .page {
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            opacity: 1;
-            transform: translateY(0);
+        /* 1. Particles Container (particles.js requires a DOM element) */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1E392A; /* Dark Green Base */
+            z-index: -10;
         }
 
-        .page.hidden-page {
+        /* 2. Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+            mix-blend-mode: screen;
+            z-index: 1000;
+            opacity: 0.9;
+            box-shadow: 0 0 15px #FFD700;
+        }
+
+        .custom-cursor.hovered {
+            width: 35px;
+            height: 35px;
+            opacity: 0.5;
+            box-shadow: 0 0 25px #FDD835;
+        }
+
+        /* 3. Animated Button Border */
+        .animated-btn {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: border-pulse 2s infinite alternate;
+        }
+
+        .animated-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+            background: linear-gradient(135deg, #FFD700, #2C5F2D, #FFD700, #F0FFF0);
+            background-size: 400% 400%;
+            z-index: -1;
+            transition: opacity 0.4s ease;
             opacity: 0;
-            transform: translateY(20px);
-            display: none !important;
         }
 
-        /* Subtle Crescent Moon Animation */
-        @keyframes subtle-float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0); }
+        .animated-btn:hover::before {
+            opacity: 1;
+            animation: gradient-shift 6s ease infinite;
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        #crescent-moon {
-            animation: subtle-float 4s ease-in-out infinite;
+        /* 4. Glowing Lantern Component */
+        .glowing-lantern {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #FFD700;
+            margin: 0 auto 1.5rem;
+            animation: lantern-glow 3s ease-in-out infinite alternate;
+            position: relative;
+            opacity: 0.85;
+        }
+        .glowing-lantern::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            background-color: #336633; /* Darker core */
+            z-index: 1;
         }
 
-        /* Scrollbar styling for a cleaner look */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* General Section Styling */
+        .section-bg-2 {
+            background-color: rgba(44, 95, 45, 0.6); /* Deep Green with Transparency */
+            backdrop-filter: blur(2px);
         }
-        ::-webkit-scrollbar-thumb {
-            background: #D97706; /* Amber 700 */
-            border-radius: 4px;
+        .section-bg-3 {
+            background-color: rgba(30, 57, 42, 0.6); /* Dark Green with Transparency */
+            backdrop-filter: blur(2px);
         }
-        ::-webkit-scrollbar-track {
-            background: #E5E7EB;
+        .text-shadow-gold {
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
         }
-
     </style>
 </head>
-<body class="bg-ramadan-light text-ramadan-dark-green min-h-screen flex flex-col">
 
-    <!-- Header / Navigation Bar -->
-    <header class="bg-ramadan-green shadow-xl sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo/Title -->
-                <div class="flex items-center">
-                    <i id="crescent-moon" class="fas fa-moon text-ramadan-gold text-2xl mr-3"></i>
-                    <span class="text-2xl font-bold text-white">Ramadan Hub</span>
+<body class="bg-dark-green text-cream min-h-screen relative overflow-x-hidden font-sans">
+
+    <!-- particles.js Container for Animated Background -->
+    <div id="particles-js"></div>
+
+    <!-- Custom Cursor Follower -->
+    <div id="custom-cursor" class="custom-cursor"></div>
+
+    <main class="relative z-10 pt-16">
+        <!-- HEADER / HERO SECTION -->
+        <header id="hero" class="section-bg-3 pt-24 pb-16 text-center border-b border-light-gold/50 shadow-inner shadow-dark-green/50">
+            <div class="max-w-4xl mx-auto px-6">
+                <p class="text-xl text-light-gold mb-3 animate-float tracking-widest">In the Name of Allah, The Most Gracious, The Most Merciful</p>
+                <h1 class="text-7xl md:text-8xl font-extrabold text-gold tracking-tighter mb-6 text-shadow-gold animate-text-flicker">
+                    Ramadan: The Illuminated Path
+                </h1>
+                <p class="text-2xl max-w-2xl mx-auto mb-10 opacity-90 italic">
+                    A month of spiritual journey, where every breath is worship and every silence is reflection.
+                </p>
+                <div class="flex justify-center space-x-6">
+                    <a href="#motivation" class="animated-btn text-lg px-8 py-3 rounded-lg font-semibold bg-dark-green text-gold hover:text-cream hover:scale-[1.03] transition duration-300">
+                        Find Motivation
+                    </a>
+                    <a href="#history" class="animated-btn text-lg px-8 py-3 rounded-lg font-semibold bg-gold text-dark-green hover:bg-light-gold hover:scale-[1.03] transition duration-300">
+                        Prophet's Wisdom (SAW)
+                    </a>
                 </div>
-                <!-- Navigation Links (Desktop) -->
-                <nav class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <button data-page="home" class="nav-link text-white hover:text-ramadan-gold px-3 py-2 rounded-md text-sm font-medium transition duration-150 bg-ramadan-dark-green" aria-current="page">Home</button>
-                        <button data-page="calendar" class="nav-link text-white hover:text-ramadan-gold px-3 py-2 rounded-md text-sm font-medium transition duration-150">Calendar</button>
-                        <button data-page="duas" class="nav-link text-white hover:text-ramadan-gold px-3 py-2 rounded-md text-sm font-medium transition duration-150">Duas</button>
+            </div>
+        </header>
+
+        <!-- RAMADAN CALENDAR & COUNTDOWN -->
+        <section id="calendar" class="section-bg-2 py-20 border-b border-light-gold/30">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-5xl font-bold text-gold mb-10 text-center border-b-2 border-gold/30 pb-4 text-shadow-gold">
+                    The Sacred Time: Calendar & Timing
+                </h2>
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-dark-green/70 p-8 rounded-xl shadow-2xl hover:shadow-light-gold/50 transition duration-500 transform hover:-translate-y-1">
+                        <div class="glowing-lantern mx-auto"></div>
+                        <h3 class="text-3xl font-semibold text-cream mb-2">Lunar Date</h3>
+                        <p class="text-xl text-light-gold" id="lunar-date">22 Jumada al-Awwal, 1447 AH (Mock)</p>
                     </div>
-                </nav>
-                <!-- Mobile Menu Button (Hamburger) -->
-                <button id="mobile-menu-button" class="md:hidden text-white hover:text-ramadan-gold focus:outline-none transition duration-150">
-                    <i class="fas fa-bars text-xl"></i>
+                    <div class="bg-dark-green/70 p-8 rounded-xl shadow-2xl hover:shadow-light-gold/50 transition duration-500 transform hover:-translate-y-1">
+                        <svg class="w-16 h-16 text-light-gold mx-auto mb-4 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <h3 class="text-3xl font-semibold text-cream mb-2">Ramadan Starts In</h3>
+                        <div class="text-4xl font-extrabold text-gold animate-bounce" id="countdown">Calculating...</div>
+                    </div>
+                    <div class="bg-dark-green/70 p-8 rounded-xl shadow-2xl hover:shadow-light-gold/50 transition duration-500 transform hover:-translate-y-1">
+                        <div class="glowing-lantern mx-auto"></div>
+                        <h3 class="text-3xl font-semibold text-cream mb-2">Fasting Intention</h3>
+                        <p class="text-xl text-light-gold italic">Nawaytu Sawma Ghadin an Ada’i Fardhi Shahri Ramadan</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MOTIVATION FOR THE PATH (NEW SECTION) -->
+        <section id="motivation" class="section-bg-3 py-20 border-b border-light-gold/50">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-5xl font-bold text-light-gold mb-12 text-center border-b-2 border-gold/30 pb-4 text-shadow-gold">
+                    Ignite Your Heart: Motivation for Salah and Taubah
+                </h2>
+                <div class="space-y-10">
+                    <blockquote class="p-6 bg-deep-green/60 rounded-xl shadow-2xl border-l-4 border-gold transition duration-500 hover:scale-[1.01] animate-float">
+                        <p class="text-2xl italic text-cream mb-4">
+                            "The moment you feel like giving up on prayer, remember that Allah never gave up on you. He waits for your return, welcoming you back with boundless mercy."
+                        </p>
+                        <footer class="text-light-gold font-semibold text-lg">— A reminder for the seeking soul.</footer>
+                    </blockquote>
+                    <blockquote class="p-6 bg-deep-green/60 rounded-xl shadow-2xl border-l-4 border-gold transition duration-500 hover:scale-[1.01] animate-float">
+                        <p class="text-2xl italic text-cream mb-4">
+                            "Ramadan is the opportunity to reset your heart's compass. Every Sujood (prostration) is a connection, every tear of repentance (Taubah) washes away a year of heedlessness. Do not let the door of forgiveness close while you stand at the threshold."
+                        </p>
+                        <footer class="text-light-gold font-semibold text-lg">— Seek refuge in His mercy.</footer>
+                    </blockquote>
+                </div>
+                <button class="animated-btn text-xl mt-12 px-10 py-4 rounded-lg font-bold bg-dark-green text-gold hover:text-cream border-gold hover:scale-105">
+                    Renew Your Intention
                 </button>
             </div>
-        </div>
+        </section>
 
-        <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="md:hidden hidden bg-ramadan-dark-green pb-2">
-            <button data-page="home" class="nav-link block w-full text-left text-white hover:text-ramadan-gold px-3 py-2 text-base font-medium transition duration-150 bg-ramadan-green">Home</button>
-            <button data-page="calendar" class="nav-link block w-full text-left text-white hover:text-ramadan-gold px-3 py-2 text-base font-medium transition duration-150">Calendar</button>
-            <button data-page="duas" class="nav-link block w-full text-left text-white hover:text-ramadan-gold px-3 py-2 text-base font-medium transition duration-150">Duas</button>
-        </div>
-    </header>
+        <!-- DUAS (SUPPLICATIONS) SECTION -->
+        <section id="duas" class="section-bg-2 py-20 border-b border-light-gold/30">
+            <div class="max-w-5xl mx-auto px-6">
+                <h2 class="text-5xl font-bold text-gold mb-12 text-center border-b-2 border-gold/30 pb-4 text-shadow-gold">
+                    Whispers of the Soul: Essential Duas
+                </h2>
 
-    <!-- Main Content Area -->
-    <main id="content-area" class="flex-grow max-w-7xl mx-auto w-full p-4 md:p-8">
-
-        <!-- 1. Home Page -->
-        <div id="home-page" class="page bg-white p-6 md:p-10 rounded-xl shadow-2xl border-t-4 border-ramadan-gold">
-            <div class="text-center space-y-4">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-ramadan-green tracking-tight">
-                    <i class="fas fa-star text-ramadan-gold text-4xl mr-3"></i>
-                    Ramadan Kareem
-                    <i class="fas fa-star text-ramadan-gold text-4xl ml-3"></i>
-                </h1>
-                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
-                    A peaceful digital space dedicated to the blessed month of Ramadan. This GitHub project aims to be a minimal, informational resource for daily routines and spiritual reminders.
-                </p>
-            </div>
-
-            <div class="mt-12 grid md:grid-cols-3 gap-8 text-center">
-                <div class="p-6 bg-ramadan-light rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
-                    <i class="fas fa-clock text-4xl text-ramadan-gold mb-3"></i>
-                    <h2 class="text-2xl font-semibold text-ramadan-dark-green">Timings & Structure</h2>
-                    <p class="mt-2 text-gray-600">View the daily Suhoor and Iftar timings and keep track of the month's progress.</p>
-                </div>
-                <div class="p-6 bg-ramadan-light rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
-                    <i class="fas fa-book-reader text-4xl text-ramadan-gold mb-3"></i>
-                    <h2 class="text-2xl font-semibold text-ramadan-dark-green">Essential Duas</h2>
-                    <p class="mt-2 text-gray-600">Access key supplications for the beginning, middle, and end of the fast, and for Laylat al-Qadr.</p>
-                </div>
-                <div class="p-6 bg-ramadan-light rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
-                    <i class="fas fa-hands-praying text-4xl text-ramadan-gold mb-3"></i>
-                    <h2 class="text-2xl font-semibold text-ramadan-dark-green">Spiritual Reflection</h2>
-                    <p class="mt-2 text-gray-600">Use this time for deeper contemplation, focusing on growth and charitable actions.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. Calendar Page -->
-        <div id="calendar-page" class="page hidden-page bg-white p-6 md:p-10 rounded-xl shadow-2xl border-t-4 border-ramadan-gold">
-            <h2 class="text-4xl font-extrabold text-ramadan-green mb-6 text-center">
-                Ramadan Daily Calendar <i class="far fa-calendar-alt text-ramadan-gold"></i>
-            </h2>
-            <p class="text-center text-gray-600 mb-8">Mock timings provided for illustration. Always verify with local masjid/official sources.</p>
-
-            <div class="overflow-x-auto rounded-lg shadow-lg">
-                <table class="min-w-full divide-y divide-ramadan-gold">
-                    <thead class="bg-ramadan-green text-white">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Day</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Date (Hijri)</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Suhoor Ends</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Iftar Begins</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-ramadan-light divide-y divide-ramadan-green/30 text-gray-700">
-                        <tr class="hover:bg-ramadan-green/10 transition duration-150">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-ramadan-gold">1</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Ramadan 1</td>
-                            <td class="px-6 py-4 whitespace-nowrap">5:45 AM</td>
-                            <td class="px-6 py-4 whitespace-nowrap">6:35 PM</td>
-                        </tr>
-                        <tr class="hover:bg-ramadan-green/10 transition duration-150 bg-ramadan-gold/20 font-semibold">
-                            <td class="px-6 py-4 whitespace-nowrap text-ramadan-dark-green">10</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Ramadan 10</td>
-                            <td class="px-6 py-4 whitespace-nowrap">5:30 AM</td>
-                            <td class="px-6 py-4 whitespace-nowrap">6:45 PM</td>
-                        </tr>
-                        <tr class="hover:bg-ramadan-green/10 transition duration-150">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-ramadan-gold">20</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Ramadan 20</td>
-                            <td class="px-6 py-4 whitespace-nowrap">5:15 AM</td>
-                            <td class="px-6 py-4 whitespace-nowrap">6:55 PM</td>
-                        </tr>
-                        <tr class="hover:bg-ramadan-green/10 transition duration-150 bg-ramadan-gold/20 font-semibold">
-                            <td class="px-6 py-4 whitespace-nowrap text-ramadan-dark-green">27</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Laylat al-Qadr (Est.)</td>
-                            <td class="px-6 py-4 whitespace-nowrap">5:05 AM</td>
-                            <td class="px-6 py-4 whitespace-nowrap">7:05 PM</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="mt-8 p-4 border-l-4 border-ramadan-green bg-ramadan-green/10 rounded-lg">
-                <p class="font-semibold text-ramadan-dark-green">Note on Timing:</p>
-                <p class="text-sm text-gray-600">The Suhoor end time marks the beginning of the Fajr prayer time (Subh Sadiq). Iftar time is always Maghrib prayer time (Sunset).</p>
-            </div>
-        </div>
-
-        <!-- 3. Duas Page -->
-        <div id="duas-page" class="page hidden-page bg-white p-6 md:p-10 rounded-xl shadow-2xl border-t-4 border-ramadan-gold">
-            <h2 class="text-4xl font-extrabold text-ramadan-green mb-6 text-center">
-                Essential Ramadan Duas <i class="fas fa-scroll text-ramadan-gold"></i>
-            </h2>
-            <p class="text-center text-gray-600 mb-8">Short supplications to read throughout the blessed month.</p>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Dua 1: Intention for Fasting (Niyyah) -->
-                <div class="p-5 bg-ramadan-light rounded-lg shadow-md border border-ramadan-gold/50">
-                    <h3 class="text-2xl font-bold text-ramadan-dark-green mb-3">1. Dua for Suhoor (Intention)</h3>
-                    <p class="text-right text-3xl font-serif text-ramadan-green my-4" style="font-family: 'Times New Roman', serif;">
+                <!-- Dua Card 1: Sehri (Pre-dawn meal) -->
+                <div class="bg-dark-green/70 p-8 rounded-xl shadow-2xl mb-8 transform hover:scale-[1.02] transition duration-500">
+                    <h3 class="text-3xl font-bold text-light-gold mb-4">Dua for Eating the Pre-Dawn Meal (Sehri)</h3>
+                    <p class="text-2xl text-cream italic mb-4 text-right">
                         وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ
                     </p>
-                    <p class="text-lg text-gray-700 italic border-t pt-3 border-ramadan-gold/30">
-                        *Wa bi-sawmi ghadin nawaytu min shahri Ramadan.*
+                    <p class="text-xl text-cream mb-2">
+                        **Transliteration:** *Wa bi sawmi ghadin nawaytu min shahri Ramadan.*
                     </p>
-                    <p class="text-sm mt-1 text-gray-500">
-                        (Translation: I intend to keep the fast for tomorrow in the month of Ramadan.)
-                    </p>
-                </div>
-
-                <!-- Dua 2: Breaking the Fast (Iftar) -->
-                <div class="p-5 bg-ramadan-light rounded-lg shadow-md border border-ramadan-gold/50">
-                    <h3 class="text-2xl font-bold text-ramadan-dark-green mb-3">2. Dua for Iftar (Breaking Fast)</h3>
-                    <p class="text-right text-3xl font-serif text-ramadan-green my-4" style="font-family: 'Times New Roman', serif;">
-                        اَللَّهُمَّ إِنِّي لَكَ صُمْتُ وَ بِكَ آمَنْتُ وَ عَلَيْكَ تَوَكَّلْتُ وَ عَلَى رِزْقِكَ أَفْطَرْتُ
-                    </p>
-                    <p class="text-lg text-gray-700 italic border-t pt-3 border-ramadan-gold/30">
-                        *Allahumma inni laka sumtu wa bika aamantu wa 'alayka tawakkaltu wa 'ala rizqika aftartu.*
-                    </p>
-                    <p class="text-sm mt-1 text-gray-500">
-                        (Translation: O Allah! I fasted for Your sake, and I believe in You, and I put my trust in You, and I break my fast with Your provision.)
+                    <p class="text-lg text-cream opacity-80">
+                        **Meaning:** "I intend to keep the fast for tomorrow in the month of Ramadan."
                     </p>
                 </div>
 
-                <!-- Dua 3: Post-Iftar (Thirst gone) -->
-                <div class="p-5 bg-ramadan-light rounded-lg shadow-md border border-ramadan-gold/50 col-span-1 md:col-span-2">
-                    <h3 class="text-2xl font-bold text-ramadan-dark-green mb-3">3. Post-Iftar Dua (Simpler)</h3>
-                    <p class="text-right text-3xl font-serif text-ramadan-green my-4" style="font-family: 'Times New Roman', serif;">
-                        ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ
+                <!-- Dua Card 2: Laylatul Qadr (Night of Power) - Repeated for emphasis -->
+                <div class="bg-dark-green/70 p-8 rounded-xl shadow-2xl mb-8 transform hover:scale-[1.02] transition duration-500">
+                    <h3 class="text-3xl font-bold text-light-gold mb-4">Dua for Laylatul Qadr</h3>
+                    <p class="text-2xl text-cream italic mb-4 text-right">
+                        اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي
                     </p>
-                    <p class="text-lg text-gray-700 italic border-t pt-3 border-ramadan-gold/30">
-                        *Dhahaba-zh Zhama’u, wabtallatil-‘uruuqu, wa thabatal-ajru in shaa’ Allah.*
+                    <p class="text-xl text-cream mb-2">
+                        **Transliteration:** *Allahumma innaka 'afuwwun tuhibbul 'afwa fa'fu 'anni.*
                     </p>
-                    <p class="text-sm mt-1 text-gray-500">
-                        (Translation: The thirst is gone, the veins are moistened, and the reward is confirmed, if Allah wills.)
+                    <p class="text-lg text-cream opacity-80">
+                        **Meaning:** "O Allah, indeed You are Pardoning, You love pardon, so pardon me." (At-Tirmidhi)
+                    </div>
+                </div>
+        </section>
+
+        <!-- HISTORY & SAYINGS (EXPANDED SECTION) -->
+        <section id="history" class="section-bg-3 py-20 border-b border-light-gold/50">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-5xl font-bold text-gold mb-12 text-center border-b-2 border-gold/30 pb-4 text-shadow-gold">
+                    Prophetic Wisdom & Historical Milestones
+                </h2>
+
+                <!-- Sayings & Hadith -->
+                <div class="mb-16">
+                    <h3 class="text-4xl font-extrabold text-light-gold mb-6 border-l-4 border-gold pl-4 animate-float">Timeless Sayings (Hadith) of Prophet Muhammad (SAW)</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-deep-green/70 p-6 rounded-xl shadow-xl transition duration-300 hover:shadow-gold/50">
+                            <p class="text-2xl italic text-cream mb-3">
+                                "Verily, actions are by intentions, and for everyone is what he intended."
+                            </p>
+                            <p class="text-gold font-semibold text-right">— Sahih al-Bukhari</p>
+                        </div>
+                        <div class="bg-deep-green/70 p-6 rounded-xl shadow-xl transition duration-300 hover:shadow-gold/50">
+                            <p class="text-2xl italic text-cream mb-3">
+                                "The best of people are those who are most beneficial to people."
+                            </p>
+                            <p class="text-gold font-semibold text-right">— Al-Mu’jam al-Awsat</p>
+                        </div>
+                        <div class="bg-deep-green/70 p-6 rounded-xl shadow-xl transition duration-300 hover:shadow-gold/50">
+                            <p class="text-2xl italic text-cream mb-3">
+                                "A strong person is not the one who can physically overpower others, but the one who controls himself when angry."
+                            </p>
+                            <p class="text-gold font-semibold text-right">— Sahih al-Bukhari</p>
+                        </div>
+                        <div class="bg-deep-green/70 p-6 rounded-xl shadow-xl transition duration-300 hover:shadow-gold/50">
+                            <p class="text-2xl italic text-cream mb-3">
+                                "Ramadan has come to you. It is a month of blessing, in which Allah covers you with blessings, so He sends down mercy, alleviates sins and answers prayers."
+                            </p>
+                            <p class="text-gold font-semibold text-right">— Sunan an-Nasa'i</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historical Event: Battle of Badr (Ramadan Connection) -->
+                <div class="mb-16 bg-dark-green/70 p-10 rounded-2xl shadow-2xl border-l-8 border-gold/70">
+                    <h3 class="text-4xl font-extrabold text-light-gold mb-4 border-l-4 border-gold pl-4">The Victory of Badr: The First Major Battle</h3>
+                    <p class="text-lg leading-relaxed text-cream opacity-90 mb-4">
+                        The Battle of Badr, a monumental event in early Islamic history, took place on the 17th of Ramadan, 2 AH (March 624 CE). It was a decisive engagement between the nascent Muslim community from Madinah, led by the Prophet (SAW), and the vastly superior army of the Quraysh from Makkah.
+                    </p>
+                    <p class="text-lg leading-relaxed text-cream opacity-90 mb-4 italic">
+                        Despite being heavily outnumbered and fasting, the Muslims, fortified by their faith and the Prophet’s (SAW) fervent prayers for Divine assistance, achieved a miraculous victory. This battle cemented the Muslims' place as a powerful force and is a profound reminder of how faith and perseverance, even in a state of fasting, can overcome overwhelming odds.
+                    </p>
+                    <p class="text-lg leading-relaxed text-cream opacity-90">
+                        The outcome was not merely a military one; it taught the believers the importance of patience, submission to Allah's will, and the unwavering conviction that aid comes from God alone.
                     </p>
                 </div>
+
             </div>
-        </div>
+        </section>
+
+        <!-- FOOTER / CLOSING SECTION -->
+        <footer class="section-bg-2 py-12 text-center border-t border-gold/50">
+            <div class="max-w-5xl mx-auto px-6">
+                <p class="text-3xl font-serif text-light-gold mb-4 animate-text-flicker">
+                    Fasting is for Me, and I shall reward for it.
+                </p>
+                <p class="text-cream opacity-70">&copy; 2025 The Illuminated Path. Peace and blessings be upon our beloved Prophet Muhammad (SAW).</p>
+            </div>
+        </footer>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-ramadan-dark-green text-white p-4 text-center text-sm mt-8">
-        <p>&copy; 2024 Ramadan Hub. Designed with peaceful intentions and built for the community.</p>
-        <p class="mt-1">
-            <a href="#" class="hover:text-ramadan-gold transition duration-150">Privacy</a> |
-            <a href="#" class="hover:text-ramadan-gold transition duration-150">Contribute on GitHub</a>
-        </p>
-    </footer>
-
+    <!-- JAVASCRIPT FOR ANIMATIONS AND LOGIC -->
     <script>
-        const navLinks = document.querySelectorAll('.nav-link');
-        const pages = document.querySelectorAll('.page');
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+        // --- Core Application Setup ---
 
-        /**
-         * Hides all pages and shows the selected one with a fade-in animation.
-         * Updates the active state of the navigation links.
-         * @param {string} pageName - The ID prefix of the page to show (e.g., 'home', 'calendar').
-         */
-        function showPage(pageName) {
-            const targetPageId = `${pageName}-page`;
+        const customCursor = document.getElementById('custom-cursor');
+        
+        // --- 1. Cursor Moving Animation ---
+        document.addEventListener('mousemove', (e) => {
+            // Update cursor position
+            customCursor.style.left = e.clientX + 'px';
+            customCursor.style.top = e.clientY + 'px';
+        });
 
-            pages.forEach(page => {
-                if (page.id === targetPageId) {
-                    page.classList.remove('hidden-page');
-                    page.style.display = 'block';
-                    // Force reflow to restart CSS animation/transition
-                    void page.offsetWidth;
-                } else {
-                    page.classList.add('hidden-page');
-                    // Hide completely after transition
-                    setTimeout(() => {
-                        if (page.classList.contains('hidden-page')) {
-                             page.style.display = 'none';
-                        }
-                    }, 500);
-                }
+        // Hover animation for buttons and other interactive elements
+        document.querySelectorAll('.animated-btn, .glowing-lantern').forEach(element => {
+            element.addEventListener('mouseenter', () => customCursor.classList.add('hovered'));
+            element.addEventListener('mouseleave', () => customCursor.classList.remove('hovered'));
+        });
+
+        // --- 2. particles.js Initialization (Animated Background) ---
+        function initializeParticles() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 150,
+                        "density": { "enable": true, "value_area": 800 }
+                    },
+                    "color": { "value": "#FFD700" }, // Gold particles
+                    "shape": {
+                        "type": "circle",
+                        "stroke": { "width": 0, "color": "#000000" },
+                        "polygon": { "nb_sides": 5 },
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": { "enable": true, "speed": 2, "size_min": 0.5, "sync": false }
+                    },
+                    "line_linked": {
+                        "enable": false, // Disable lines for a "dust/light" effect
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 0.5, // Slow, peaceful movement
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": { "enable": true, "mode": "grab" },
+                        "onclick": { "enable": false },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": { "distance": 150, "line_linked": { "opacity": 0.5 } },
+                    }
+                },
+                "retina_detect": true
             });
+        }
 
-            // Update Nav Link Active State
-            navLinks.forEach(link => {
-                link.classList.remove('bg-ramadan-dark-green', 'font-semibold');
-                if (link.dataset.page === pageName) {
-                    link.classList.add('bg-ramadan-dark-green', 'font-semibold');
-                }
-            });
+        // --- 3. Ramadan Calendar Logic (Mock) ---
 
-             // Close mobile menu after selection
-            if (!mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
+        function updateCountdown() {
+            // NOTE: Using a mock date for the next Ramadan start (approx. March 1st, 2026).
+            const nextRamadan = new Date('March 1, 2026 00:00:00').getTime();
+            const now = new Date().getTime();
+
+            const distance = nextRamadan - now;
+            const countdownEl = document.getElementById('countdown');
+
+            if (distance < 0) {
+                countdownEl.innerHTML = "Ramadan is now! Allahu Akbar!";
+                return;
             }
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownEl.innerHTML = `<span class="text-5xl">${days}</span><span class="text-lg">D</span> <span class="text-5xl">${hours}</span><span class="text-lg">H</span> <span class="text-5xl">${minutes}</span><span class="text-lg">M</span> <span class="text-5xl">${seconds}</span><span class="text-lg">S</span>`;
         }
 
-        /**
-         * Initializes event listeners for navigation and mobile menu.
-         */
-        function init() {
-            // Set up page navigation
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    const page = e.currentTarget.dataset.page;
-                    showPage(page);
-                });
-            });
 
-            // Toggle mobile menu
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+        // --- Initialize on Load ---
+        window.onload = function() {
+            // Start particle system
+            initializeParticles();
 
-            // Show the home page initially
-            showPage('home');
-        }
-
-        window.onload = init;
+            // Start countdown timer
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        };
     </script>
 </body>
 </html>
